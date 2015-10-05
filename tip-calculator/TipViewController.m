@@ -7,6 +7,7 @@
 //
 
 #import "TipViewController.h"
+#import "SettingsViewController.h"
 
 @interface TipViewController ()
 
@@ -17,6 +18,7 @@
 
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
+- (void)onSettingsButton;
 @end
 
 @implementation TipViewController
@@ -24,9 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+
     if (self){
         self.title = @"Tip Calculator";
     }
+    
     [self updateValues];
 }
 
@@ -49,6 +54,7 @@
     [self.view endEditing:YES];
     [self updateValues];
 }
+
 - (void)updateValues {
     float billAmount = [self.billTextField.text floatValue];
     
@@ -58,7 +64,34 @@
     
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-    
-    
 }
+
+- (void)onSettingsButton {
+    SettingsViewController* svc = [[SettingsViewController alloc] init];
+    svc.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self.navigationController pushViewController:svc animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"view will appear");
+    
+    // Set the default tip percentage from the user settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int defaultTipSegmentIndex = [defaults integerForKey:@"default_tip_segment_index"];
+    [self.tipControl setSelectedSegmentIndex:defaultTipSegmentIndex];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"view did appear");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"view will disappear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"view did disappear");
+}
+
 @end

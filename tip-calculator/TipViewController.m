@@ -17,8 +17,10 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 
 - (IBAction)onTap:(id)sender;
+- (IBAction)onBillValueChanged:(id)sender;
 - (void)updateValues;
 - (void)onSettingsButton;
+
 @end
 
 @implementation TipViewController
@@ -33,6 +35,8 @@
     }
     
     [self updateValues];
+    
+    [self.billTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +75,10 @@
     svc.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.navigationController pushViewController:svc animated:YES];
+}
+
+- (IBAction)onBillValueChanged:(id)sender {
+    [self updateValues];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -23,6 +23,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    if (self){
+        self.title = @"Settings";
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger defaultTipSegmentIndex = [defaults integerForKey:@"default_tip_segment_index"];
     [self.defaultTipControl setSelectedSegmentIndex:defaultTipSegmentIndex];

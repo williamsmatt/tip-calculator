@@ -82,25 +82,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"view will appear");
-    
     // Set the default tip percentage from the user settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int defaultTipSegmentIndex = [defaults integerForKey:@"default_tip_segment_index"];
     [self.tipControl setSelectedSegmentIndex:defaultTipSegmentIndex];
     [self updateValues];
 }
-
-//- (void)viewDidAppear:(BOOL)animated {
-//    NSLog(@"view did appear");
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//    NSLog(@"view will disappear");
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    NSLog(@"view did disappear");
-//}
 
 @end
